@@ -39,7 +39,7 @@
         <td><?php echo "$post_content"; ?></td>
         <td><?php echo "$post_category_id"; ?></td>
         <td><?php echo "$post_date"; ?></td>
-        <td><?php echo "$post_image"; ?></td>
+        <td><img src="../images/<?php echo $post_image?>" width="200" height="100"></td>
         <td><?php echo "$post_tag"; ?></td>
         <td><?php echo "$post_comment_count"; ?></td>
         <td><?php echo "$post_status"; ?></td>
