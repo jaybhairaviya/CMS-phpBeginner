@@ -72,5 +72,56 @@ function addPost() {
   }
 }
 
+function fetchEditFields(){
+  global $connection,$post_author,$post_category_id,$post_date,$post_title,$post_content,$post_image,$post_tag;
+  if($_GET['edit']){
+    $post_id = $_GET['edit'];
+    $query = "SELECT * FROM posts WHERE post_id=$post_id";
+    $query_result = mysqli_query($connection,$query);
+    if(!$query_result){
+      echo DIE(mysqli_error($connection));
+    }
+    while ($row=mysqli_fetch_assoc($query_result)) {
+
+      $post_author = $row["post_author"];
+      $post_category_id=$row['post_category_id'];
+      $post_title=$row['post_title'];
+      $post_date=$row['post_date'];
+      $post_content=$row['post_content'];
+      $post_image=$row['post_image'];
+      $post_tag=$row['post_tag'];
+  }}
+}
+
+
+
+function editPost(){
+  global $connection;
+  if(isset($_POST['updatePost'])){
+    $post_id=$_GET['edit'];
+    $post_author = $_POST["post_author"];
+    $post_category_id=$_POST['post_category_id'];
+    $post_title=$_POST['post_title'];
+    $post_date=date('d-m-y');
+    $post_content=$_POST['post_content'];
+    $post_image=$_FILES['post_image']['name'];
+    if(empty($post_image)){
+      $query = "SELECT * FROM posts WHERE post_id=$post_id";
+      $query_result = mysqli_query($connection,$query);
+      while ($row = mysqli_fetch_assoc($query_result)) {
+        $post_image = $row['post_image'];
+      }
+    }
+    else {
+      $post_image_tmp = $_FILES['post_image']['tmp_name'];
+      move_uploaded_file($post_image_tmp,"../images/$post_image");
+    }
+    $post_tag=$_POST['post_tag'];
+    $query = "UPDATE posts SET post_author='$post_author', post_title='$post_title', post_category_id='$post_category_id', post_date='$post_date', post_image='$post_image', post_content='$post_content', post_tag='$post_tag' WHERE post_id={$post_id}";
+    $query_result = mysqli_query($connection,$query);
+
+
+  }
+}
 
 ?>
