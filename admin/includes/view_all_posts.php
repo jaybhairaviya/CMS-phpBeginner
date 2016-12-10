@@ -35,9 +35,9 @@
       <tr>
         <td><?php echo $post_id?></td>
         <td><?php echo "$post_author"; ?></td>
-        <td><?php echo "$post_category_id"; ?></td>
         <td><?php echo "$post_title"; ?></td>
         <td><?php echo "$post_content"; ?></td>
+        <td><?php echo "$post_category_id"; ?></td>
         <td><?php echo "$post_date"; ?></td>
         <td><?php echo "$post_image"; ?></td>
         <td><?php echo "$post_tag"; ?></td>
