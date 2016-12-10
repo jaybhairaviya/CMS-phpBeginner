@@ -27,8 +27,7 @@ while ($row = mysqli_fetch_assoc($query_result)) {
                 <hr>
 
                 <!-- Preview Image -->
-                <img class="img-responsive" src="images/<?php echo $post_image?>" alt="">
-
+                <img class="img-responsive" width="200px" height="100px"src="images/<?php echo $post_image?>" alt="">
                 <hr>
 
                 <!-- Post Content -->
