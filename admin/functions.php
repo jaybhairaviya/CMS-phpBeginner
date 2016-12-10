@@ -50,4 +50,27 @@ function deletePost(){
     }
   }
 }
- ?>
+
+function addPost() {
+  global $connection;
+  if(isset($_POST['addPost'])){
+      $post_author = $_POST["post_author"];
+      $post_category_id=$_POST['post_category_id'];
+      $post_title=$_POST['post_title'];
+      $post_date=date('d-m-y');
+      $post_content=$_POST['post_content'];
+      $post_image=$_FILES['post_image']['name'];
+      $post_image_tmp = $_FILES['post_image']['tmp_name'];
+      move_uploaded_file($post_image_tmp,"../images/$post_image");
+      $post_tag=$_POST['post_tag'];
+      $query = "INSERT INTO posts(post_author,post_category_id,post_date,post_title,post_content,post_image,post_tag)";
+      $query .= "VALUES('$post_author','$post_category_id','$post_date','$post_title','$post_content','$post_image','$post_tag')";
+      $query_result = mysqli_query($connection,$query);
+      if(!$query_result){
+        echo DIE('mysqli_error($connection);');
+      }
+  }
+}
+
+
+?>
