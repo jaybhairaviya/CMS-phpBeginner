@@ -8,6 +8,8 @@ while ($row = mysqli_fetch_assoc($query_result)) {
   $post_date = $row['post_date'];
   $post_image = $row['post_image'];
   $post_content = $row['post_content'];
+  $post_content=substr($post_content,0,50)."<a href='posts.php?post_id=$post_id'>.....Read more</a>";
+
   ?>
                 <!-- Blog Post -->
 
