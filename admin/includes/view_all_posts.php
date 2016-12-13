@@ -5,7 +5,6 @@
       <th>Post ID</th>
       <th>Post Author</th>
       <th>Post Title</th>
-      <th>Post Content</th>
       <th>Post CategoryID</th>
       <th>Post Date</th>
       <th>Post Image</th>
@@ -36,7 +35,6 @@
         <td><?php echo $post_id?></td>
         <td><?php echo "$post_author"; ?></td>
         <td><?php echo "$post_title"; ?></td>
-        <td><?php echo "$post_content"; ?></td>
         <td><?php echo "$post_category_id"; ?></td>
         <td><?php echo "$post_date"; ?></td>
         <td><img src="../images/<?php echo $post_image?>" width="200" height="100"></td>
@@ -45,6 +43,8 @@
         <td><?php echo "$post_status"; ?></td>
         <td><a href="posts.php?delete=<?php echo $post_id?>">Delete</a></td>
         <td><a href="posts.php?source=edit_post&edit=<?php echo $post_id?>">Edit</a></td>
+        <td><a href="posts.php?status=published&post_id=<?php echo $post_id?>">Approve</a></td>
+        <td><a href="posts.php?status=draft&post_id=<?php echo $post_id?>">Disapprove</a></td>
       </tr>
 
 

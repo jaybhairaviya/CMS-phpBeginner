@@ -1,6 +1,11 @@
 <?php
-$query = "SELECT * FROM posts";
+$query = "SELECT * FROM posts WHERE post_status='published'";
 $query_result = mysqli_query($connection,$query);
+$row_count = mysqli_num_rows($query_result);
+if($row_count == 0){
+  echo "<h1>No Posts Published</h1>";
+}
+else{
 while ($row = mysqli_fetch_assoc($query_result)) {
   $post_id = $row['post_id'];
   $post_title = $row['post_title'];
@@ -37,4 +42,4 @@ while ($row = mysqli_fetch_assoc($query_result)) {
                   <?php echo "$post_content"; ?>
                 </p>
                 <hr>
-<?php } ?>
+<?php }} ?>

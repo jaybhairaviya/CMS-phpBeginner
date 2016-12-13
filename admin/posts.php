@@ -24,17 +24,33 @@
                             Posts
                         </h1>
 
-                    </div>
+
                     <!-- Carrying out deletion -->
                     <?php
                   deletePost();
                      ?>
                      <!-- Deletion Finished -->
 
+                    <!-- Add Post functiom  -->
+                    <?php addPost();  ?>
+                    <?php
+
+                    if(isset($_GET['status'])) {
+                      $post_id = $_GET['post_id'];
+                      $post_status = $_GET['status'];
+                      if($post_status == 'published' || $post_status == 'draft' ) {
+                        $query = "UPDATE posts SET post_status='$post_status' WHERE post_id=$post_id";
+                        $query_result = mysqli_query($connection,$query);
+                        if(!$query_result){
+                          echo DIE(mysqli_error($connection));
+                        }
+                      }
 
 
+                    }
+                    ?>
 
-                    <div class="col-lg-12">
+
                       <?php
                       if(isset($_GET['source'])){
                         $source = $_GET['source'];
