@@ -124,4 +124,26 @@ function editPost(){
   }
 }
 
+function deleteComment(){
+  global $connection;
+  if (isset($_GET['delete'])) {
+    $comment_id = $_GET['delete'];
+    $query_post_comment_count = "SELECT * FROM comments WHERE comment_id=$comment_id";
+    $query_post_comment_count = mysqli_query($connection,$query_post_comment_count);
+    while($row=mysqli_fetch_assoc($query_post_comment_count)){
+      $post_id=$row['comment_post_id'];
+    }
+    $query = "UPDATE posts SET post_comment_count = post_comment_count - 1 WHERE post_id=$post_id";
+    $query_result = mysqli_query($connection,$query);
+
+    $query = "DELETE FROM comments WHERE comment_id=$comment_id";
+    $query_result = mysqli_query($connection,$query);
+        if(!$query_result){
+      echo "asdasd" . DIE(mysqli_error($connection));
+    }
+
+  }
+}
+
+
 ?>

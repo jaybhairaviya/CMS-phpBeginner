@@ -64,6 +64,8 @@
 
               $query = "INSERT INTO comments(comment_post_id,comment_author,comment_email,comment_date,comment_content) VALUES('$comment_post_id','$comment_author','$comment_email','$comment_date','$comment_content')";
               $query_result = mysqli_query($connection,$query);
+              $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 WHERE post_id='{$comment_post_id}'";
+              $query_result = mysqli_query($connection,$query);
             } ?>
 
             <!-- Comments Form -->
