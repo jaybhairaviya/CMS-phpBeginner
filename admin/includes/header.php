@@ -1,4 +1,14 @@
 <?php ob_start(); ?>
+<?php session_start(); ?>
+<?php
+if(isset($_SESSION['user_role'])){
+  if($_SESSION['user_role']!='admin')
+    header("Location: ../index.php");
+}
+else {
+    header("Location: ../index.php");
+}
+ ?>
 <head>
 
     <meta charset="utf-8">
@@ -17,6 +27,7 @@
 
     <!-- Morris Charts CSS -->
     <link href="css/plugins/morris.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
