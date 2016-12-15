@@ -235,4 +235,54 @@ function editUser(){
   }
 }
 
+function fetchFieldsProfile(){
+  global $connection,$username,$user_password,$user_firstname,$user_lastname,$user_email,$user_image;
+    $query = "SELECT * FROM users WHERE username='$username'";
+    $query_result = mysqli_query($connection,$query);
+    if(!$query_result){
+      echo DIE(mysqli_error($connection));
+    }
+    while ($row=mysqli_fetch_assoc($query_result)) {
+
+      $username = $row["username"];
+      $user_password=$row['user_password'];
+      $user_firstname=$row['user_firstname'];
+      $user_lastname=$row['user_lastname'];
+      $user_email=$row['user_email'];
+      $user_role=$row['user_role'];
+      $user_image=$row['user_image'];
+  }
+}
+
+
+
+function editProfile(){
+  global $connection;
+  if(isset($_POST['updateProfile'])){
+    $old_username=$_SESSION['username'];
+    $username = $_POST["username"];
+    $user_password=$_POST['user_password'];
+    $user_firstname=$_POST['user_firstname'];
+    $user_lastname=$_POST['user_lastname'];
+    $user_email=$_POST['user_email'];
+    $user_image=$_FILES['user_image']['name'];
+    if(empty($user_image)){
+      $query = "SELECT * FROM users WHERE username='$old_username'";
+      $query_result = mysqli_query($connection,$query);
+      while ($row = mysqli_fetch_assoc($query_result)) {
+        $user_image = $row['user_image'];
+      }
+    }
+    else {
+      $user_image_tmp = $_FILES['user_image']['tmp_name'];
+      move_uploaded_file($user_image_tmp,"../images/$user_image");
+    }
+    $query = "UPDATE users SET username='$username', user_password='$user_password', user_firstname='$user_firstname', user_lastname='$user_lastname', user_image='$user_image', user_email='$user_email' WHERE username='$old_username'";
+    $query_result = mysqli_query($connection,$query);
+
+
+  }
+}
+
+
 ?>
