@@ -44,7 +44,6 @@
          ?>
         <td><?php echo "<a href='../posts.php?post_id=$comment_post_id'>$comment_post_title</a>"?></td>
         <td><a href="comments.php?delete=<?php echo $comment_id?>">Delete</a></td>
-        <td><a href="comments.php?source=edit_post&edit=<?php echo $comment_id?>">Edit</a></td>
         <td><a href="comments.php?status=approved&comment_id=<?php echo $comment_id?>">Approve</a></td>
         <td><a href="comments.php?status=unapproved&comment_id=<?php echo $comment_id?>">Disapprove</a></td>
       </tr>

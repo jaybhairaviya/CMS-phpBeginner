@@ -55,7 +55,7 @@
                             <hr>
 <?php }}
 else {
-  echo "No result";
+  echo "<h1>No result</h1>";
 }
 } ?>
             </div>

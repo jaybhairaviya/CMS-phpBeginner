@@ -17,6 +17,11 @@
                 $post_id = $_GET['post_id'];
                 $query = "SELECT * FROM posts WHERE post_id=$post_id";
                 $query_result = mysqli_query($connection,$query);
+                if(mysqli_num_rows($query_result)==0){
+                  header("Location: index.php");
+
+                }
+                else{
                 while ($row = mysqli_fetch_assoc($query_result)) {
                 $post_title = $row['post_title'];
                 $post_author = $row['post_author'];
@@ -51,7 +56,7 @@
                               <?php echo "$post_content"; ?>
                             </p>
                             <hr>
-<?php }} ?>
+<?php }}} ?>
             <!-- Blog Comments -->
 
             <!-- Adding Comment -->

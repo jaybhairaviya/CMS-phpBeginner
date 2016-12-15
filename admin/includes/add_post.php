@@ -1,7 +1,7 @@
 <script type="text/javascript">
 // checking form validity
 $(document).ready(function(){
-  var inputs = $('input,textarea');
+  var inputs = $('input');
   var selectInput = $('select');
   var validateForm = function(inputs){
     var validity = true;
@@ -33,7 +33,6 @@ $(document).ready(function(){
 
   // check for inputs validity at every change
   inputs.on('keyup',function(){
-    console.log('aaa');
     if(validateForm(inputs)){
       $('input[type=submit]').removeAttr('disabled');
     }
@@ -43,6 +42,7 @@ $(document).ready(function(){
       $('input[type=submit]').removeAttr('disabled');
     }
   });
+
 
 });
 </script>
@@ -81,12 +81,20 @@ $(document).ready(function(){
       <input type="file" name="post_image" >
     </div>
     <div class="form-group">
+      <script>tinymce.init({ selector:'textarea' });</script>
       <label for="post_content">Content</label>
       <textarea class="form-control"name="post_content" rows="8" cols="80"></textarea>
     </div>
     <div class="form-group">
       <label for="post_tag">Tags</label>
       <input type="text" name="post_tag" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="post_status">Status</label>
+      <select class="form-control" name="post_status">
+        <option value="draft">Draft</option>
+        <option value="published">Publish</option>
+      </select>
     </div>
 
     <div class="form-group">
