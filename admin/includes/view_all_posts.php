@@ -1,7 +1,79 @@
+<?php
+if(isset($_POST['apply'])){
+  if (isset($_POST['checkboxArray'])) {
+    $checkboxArray =$_POST['checkboxArray'];
+    foreach ($checkboxArray as $checkbox) {
+      switch($_POST['modify']){
+        case 'published' : {
+          $query = "UPDATE posts SET post_status='published' WHERE post_id=$checkbox";
+          $query_result = mysqli_query($connection,$query);
+          if(!$query_result){
+            echo DIE(mysqli_error($connection));
+          }
+          break;
+        }
+        case 'draft':{
+          $query = "UPDATE posts SET post_status='draft' WHERE post_id=$checkbox";
+          $query_result = mysqli_query($connection,$query);
+          if(!$query_result){
+            echo DIE(mysqli_error($connection));
+          }
+          break;
+        }
+        case 'delete':{
+          $query = "DELETE FROM posts WHERE post_id=$checkbox";
+          $query_result = mysqli_query($connection,$query);
+          if(!$query_result){
+            echo DIE(mysqli_error($connection));
+          }
+          break;
+        }
+      }
+    }
+  }
+}
 
+ ?>
+
+<form action="posts.php" method="post">
+  <div class="col-xs-3">
+    <select name="modify" class="form-control">
+      <option value="">None</option>
+      <option value="draft">Draft</option>
+      <option value="published">Published</option>
+      <option value="delete">Delete</option>
+    </select>
+  </div>
+<div class="col-xs-3">
+  <button type="submit" class="btn btn-primary" name="apply">Apply</button>
+  <a href="posts.php?source=add_post" class="btn btn-success">Add Posts</a>
+</div>
+
+
+<br>
+<br>
 <table class="table table-bordered table-hover">
   <thead>
     <tr>
+      <script type="text/javascript">
+        $(document).ready(function(){
+          checkboxAll = $('#selectAllCheckbox');
+          checkboxAll.on('click',function(){
+            if(this.checked){
+              $('.checkbox').each(function(){
+                this.checked=true;
+              });
+            }
+            else {
+              $('.checkbox').each(function(){
+                this.checked=false;
+              });
+            }
+          });
+
+        });
+      </script>
+      <th><input type="checkbox" id="selectAllCheckbox" value=""></th>
       <th>Post ID</th>
       <th>Post Author</th>
       <th>Post Title</th>
@@ -32,6 +104,7 @@
       $post_status=$row['post_status'];
       ?>
       <tr>
+        <td><input type="checkbox" name="checkboxArray[]" class="checkbox" value="<?php echo $post_id?>"></td>
         <td><?php echo $post_id?></td>
         <td><?php echo "$post_author"; ?></td>
         <td><?php echo "$post_title"; ?></td>
@@ -42,6 +115,7 @@
         <td><?php echo "$post_comment_count"; ?></td>
         <td><?php echo "$post_status"; ?></td>
         <td><a href="posts.php?delete=<?php echo $post_id?>">Delete</a></td>
+        <td><a href="../posts.php?post_id=<?php echo $post_id?>">View Post</a></td>
         <td><a href="posts.php?source=edit_post&edit=<?php echo $post_id?>">Edit</a></td>
         <td><a href="posts.php?status=published&post_id=<?php echo $post_id?>">Approve</a></td>
         <td><a href="posts.php?status=draft&post_id=<?php echo $post_id?>">Disapprove</a></td>
@@ -54,3 +128,4 @@
   </tbody>
 
 </table>
+</form>
