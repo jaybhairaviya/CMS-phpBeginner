@@ -86,11 +86,6 @@ $(document).ready(function(){
     </div>
 
     <div class="form-group">
-      <label for="user_randSalt">Salt</label>
-      <input type="text" name="user_randSalt" class="form-control">
-    </div>
-
-    <div class="form-group">
       <input type="submit" disabled name="addUser" value="Add User" class="btn btn-primary">
     </div>
   </form>

@@ -4,7 +4,6 @@
     <tr>
       <th>User ID</th>
       <th>Username</th>
-      <th>Password</th>
       <th>Firstname</th>
       <th>Lastname</th>
       <th>Email</th>
@@ -22,7 +21,6 @@
     while ($row=mysqli_fetch_assoc($query_result)) {
       $user_id=$row['user_id'];
       $username = $row["username"];
-      $user_password=$row['user_password'];
       $user_firstname=$row['user_firstname'];
       $user_lastname=$row['user_lastname'];
       $user_email=$row['user_email'];
@@ -33,7 +31,6 @@
       <tr>
         <td><?php echo $user_id?></td>
         <td><?php echo "$username"; ?></td>
-        <td><?php echo "$user_password"; ?></td>
         <td><?php echo "$user_firstname"; ?></td>
         <td><?php echo "$user_lastname"; ?></td>
         <td><?php echo "$user_email"; ?></td>

@@ -90,11 +90,6 @@ fetchEditFieldsUser();
     </div>
 
     <div class="form-group">
-      <label for="user_randSalt">Salt</label>
-      <input type="text" name="user_randSalt" class="form-control" value="<?php echo $user_randSalt ?>">
-    </div>
-
-    <div class="form-group">
       <input type="submit" disabled name="updateUser" value="Update User" class="btn btn-primary">
     </div>
   </form>
