@@ -28,6 +28,27 @@ if(isset($_POST['apply'])){
           }
           break;
         }
+        case 'clone':{
+          $query = "SELECT * FROM posts WHERE post_id='{$checkbox}'";
+          $query_result = mysqli_query($connection,$query);
+          while ($row=mysqli_fetch_assoc($query_result)) {
+            $post_author = $row["post_author"];
+            $post_category_id=$row['post_category_id'];
+            $post_title=$row['post_title'];
+            $post_date=date('d-m-y');
+            $post_content=$row['post_content'];
+            $post_image=$row['post_image'];
+            $post_tag=$row['post_tag'];
+            $post_status=$row['post_status'];
+          }
+          $query = "INSERT INTO posts(post_author,post_category_id,post_date,post_title,post_content,post_image,post_tag,post_status)";
+          $query .= "VALUES('$post_author','$post_category_id','$post_date','$post_title','$post_content','$post_image','$post_tag','$post_status')";
+          $query_result = mysqli_query($connection,$query);
+          if(!$query_result){
+            echo DIE('mysqli_error($connection);');
+          }
+          break;
+        }
       }
     }
   }
@@ -42,6 +63,7 @@ if(isset($_POST['apply'])){
       <option value="draft">Draft</option>
       <option value="published">Published</option>
       <option value="delete">Delete</option>
+      <option value="clone">Clone</option>
     </select>
   </div>
 <div class="col-xs-3">
