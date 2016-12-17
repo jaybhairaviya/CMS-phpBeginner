@@ -51,6 +51,22 @@ function deletePost(){
   }
 }
 
+function resetPostViewsCount(){
+  global $connection;
+  if (isset($_GET['reset'])) {
+    $post_id = $_GET['post_id'];
+    if($_GET['reset'] === 'true'){
+    $query="UPDATE posts SET post_views_count = 0 WHERE post_id='{$post_id}'";
+    $query_result = mysqli_query($connection,$query);
+    if(!$query_result){
+      echo "asdasd" . DIE(mysqli_error($connection));
+      }
+    }
+  }
+}
+
+
+
 function addPost() {
   global $connection;
   if(isset($_POST['addPost'])){

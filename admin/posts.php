@@ -33,6 +33,8 @@
 
                     <!-- Add Post functiom  -->
                     <?php addPost();  ?>
+                    <!-- Reset Post Views Count -->
+                    <?php resetPostViewsCount(); ?>
                     <?php
 
                     if(isset($_GET['status'])) {

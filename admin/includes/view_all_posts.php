@@ -122,6 +122,7 @@ if(isset($_POST['apply'])){
         <td><a href="posts.php?source=edit_post&edit=<?php echo $post_id?>">Edit</a></td>
         <td><a href="posts.php?status=published&post_id=<?php echo $post_id?>">Approve</a></td>
         <td><a href="posts.php?status=draft&post_id=<?php echo $post_id?>">Disapprove</a></td>
+        <td><a href="posts.php?reset=true&post_id=<?php echo $post_id?>">Reset Views Count</a></td>
       </tr>
 
 
