@@ -47,7 +47,21 @@
 
                     }
                     ?>
-                    <?php include 'includes/view_all_comments.php'; ?>
+                    <?php
+                    if(isset($_GET['source'])){
+                      $source = $_GET['source'];
+                    }
+                    else {
+                      $source = '';
+                    }
+                    switch($source){
+                      case 'view_all_comments': include 'includes/view_all_comments.php';
+                                              break;
+                      case 'post_comments' : include 'includes/post_comments.php';
+                      break;
+                      default:include 'includes/view_all_comments.php';
+                    }
+                     ?>
                     </div>
                 </div>
                 <!-- /.row -->

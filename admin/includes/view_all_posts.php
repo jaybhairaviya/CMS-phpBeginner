@@ -56,8 +56,8 @@ if(isset($_POST['apply'])){
 
  ?>
 
-<form action="posts.php" method="post">
   <div class="col-xs-3">
+    <form action="posts.php" method="post">
     <select name="modify" class="form-control">
       <option value="">None</option>
       <option value="draft">Draft</option>
@@ -136,7 +136,7 @@ if(isset($_POST['apply'])){
         <td><?php echo "$post_date"; ?></td>
         <td><img src="../images/<?php echo $post_image?>" width="200" height="100"></td>
         <td><?php echo "$post_tag"; ?></td>
-        <td><?php echo "$post_comment_count"; ?></td>
+        <td><a href="comments.php?source=post_comments&post_id=<?php echo $post_id?>"><?php echo "$post_comment_count"; ?></td>
         <td><?php echo "$post_views_count"; ?></td>
         <td><?php echo "$post_status"; ?></td>
         <td><a href="posts.php?delete=<?php echo $post_id?>">Delete</a></td>
