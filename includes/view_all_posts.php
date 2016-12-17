@@ -1,5 +1,5 @@
 <?php
-$query = "SELECT * FROM posts WHERE post_status='published'";
+$query = "SELECT * FROM posts WHERE post_status='published' ORDER BY post_id DESC";
 $query_result = mysqli_query($connection,$query);
 $row_count = mysqli_num_rows($query_result);
 if($row_count == 0){
