@@ -20,7 +20,7 @@
 
                 <!-- Blog Search Well -->
               <?php include 'includes/sidebar-search.php'; ?>
-
+              <?php include 'includes/sidebar-login.php'; ?>
                 <!-- Blog Categories Well -->
                 <?php include 'includes/side-nav.php'; ?>
                 <!-- Side Widget Well -->
@@ -28,11 +28,37 @@
 
             </div>
 
+
         </div>
         <!-- /.row -->
 
-        <hr>
 
+        <hr>
+        <div class="col-lg-12">
+          <!-- styling for active page -->
+          <style media="screen">
+            .active {
+              background: #000 !important;
+            }
+          </style>
+
+          <!-- Pagination -->
+          <div class="pager">
+            <ul>
+              <?php
+              for($i=1;$i<=$total_pages;$i++){
+              if($i == $page){
+                echo "<li><a class='active' href='index.php?page={$i}'>{$i}</a></li>";
+              }
+              else{
+                echo "<li><a href='index.php?page={$i}'>{$i}</a></li>";
+              }
+              }
+               ?>
+            </ul>
+          </div>
+        </div>
+        <br>
         <!-- Footer -->
         <footer>
             <div class="row">

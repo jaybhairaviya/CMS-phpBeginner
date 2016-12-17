@@ -1,5 +1,21 @@
 <?php
-$query = "SELECT * FROM posts WHERE post_status='published' ORDER BY post_id DESC";
+// Counting the number of pages required
+$posts_per_page = 5;
+$total_posts = "SELECT * FROM posts";
+$total_posts=mysqli_query($connection,$total_posts);
+$posts_count = mysqli_num_rows($total_posts);
+$total_pages = ceil($posts_count/$posts_per_page);
+
+// Deciding the initial post count based on page
+if(isset($_GET['page'])){
+  $page=$_GET['page'];
+  $page_start_count = ($page * $posts_per_page) - $posts_per_page;
+}
+else{
+  $page=1;
+  $page_start_count=0;
+}
+$query = "SELECT * FROM posts WHERE post_status='published' ORDER BY post_id DESC LIMIT $page_start_count,5";
 $query_result = mysqli_query($connection,$query);
 $row_count = mysqli_num_rows($query_result);
 if($row_count == 0){
