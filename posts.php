@@ -22,6 +22,12 @@
 
                 }
                 else{
+                // Incrementing the view count of post by 1
+                $view_count="UPDATE posts SET post_views_count = post_views_count + 1 WHERE post_id='{$post_id}'";
+                $view_count=mysqli_query($connection,$view_count);
+                if(!$view_count){
+                  echo DIE(mysqli_error($connection,$view_count));
+                }
                 while ($row = mysqli_fetch_assoc($query_result)) {
                 $post_title = $row['post_title'];
                 $post_author = $row['post_author'];

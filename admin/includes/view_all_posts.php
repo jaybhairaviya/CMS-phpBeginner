@@ -82,6 +82,7 @@ if(isset($_POST['apply'])){
       <th>Post Image</th>
       <th>Post Tag</th>
       <th>Post Comment Count</th>
+      <th>Post Views Count</th>
       <th>Post Status</th>
     </tr>
   </thead>
@@ -101,6 +102,7 @@ if(isset($_POST['apply'])){
       $post_image=$row['post_image'];
       $post_tag=$row['post_tag'];
       $post_comment_count=$row['post_comment_count'];
+      $post_views_count = $row['post_views_count'];
       $post_status=$row['post_status'];
       ?>
       <tr>
@@ -113,6 +115,7 @@ if(isset($_POST['apply'])){
         <td><img src="../images/<?php echo $post_image?>" width="200" height="100"></td>
         <td><?php echo "$post_tag"; ?></td>
         <td><?php echo "$post_comment_count"; ?></td>
+        <td><?php echo "$post_views_count"; ?></td>
         <td><?php echo "$post_status"; ?></td>
         <td><a href="posts.php?delete=<?php echo $post_id?>">Delete</a></td>
         <td><a href="../posts.php?post_id=<?php echo $post_id?>">View Post</a></td>
