@@ -5,30 +5,17 @@
   <body>
     <?php
     if(isset($_POST['register'])){
-      // $user_firstname = $_POST['firstname'];
-      // $user_lastname = $_POST['lastname'];
       $user_email = $_POST['email'];
       $username =$_POST['username'];
       $user_password = $_POST['password'];
-      // $user_image = $_FILELS['image']['name'];
-      // $user_temp_image = $_FILES['image']['tmp_name'];
-      // move_uploaded_file($user_temp_image,'images/{$user_image}');
       $username = mysqli_real_escape_string($connection,$username);
       $user_password = mysqli_real_escape_string($connection,$user_password);
-      $query = "SELECT user_randSalt FROM users";
-      $query_result=mysqli_query($connection,$query);
-      if(!$query_result)
-        echo DIE(mysqli_error($connection));
-      while($row = mysqli_fetch_array($query_result)){
-      $salt = $row['user_randSalt'];
-    }
-      $user_password = crypt($user_password,$salt);
       $user_email = mysqli_real_escape_string($connection,$user_email);
+      $user_password = password_hash($user_password,PASSWORD_DEFAULT,array('cost'=> 10));
       $query = "INSERT INTO users(username,user_password,user_email) VALUE('$username','$user_password','$user_email')";
       $query_result =mysqli_query($connection,$query);
       if(!$query_result)
         echo DIE(mysqli_error($connection));
-        // header("Location: index.php");
     }
 
      ?>

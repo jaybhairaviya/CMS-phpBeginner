@@ -167,12 +167,7 @@ function addUser() {
   if(isset($_POST['addUser'])){
       $username = $_POST["username"];
       $user_password=$_POST['user_password'];
-      $query = "SELECT user_randSalt FROM users";
-      $query_result=mysqli_query($connection,$query);
-      while($row = mysqli_fetch_assoc($query_result)){
-      $salt = $row['user_randSalt'];
-    }
-      $user_password = crypt($user_password,$salt);
+      $user_password = password_hash($user_password,PASSWORD_DEFAULT,array('cost'=>10));
       $user_firstname=$_POST['user_firstname'];
       $user_lastname=$_POST['user_lastname'];
       $user_email=$_POST['user_email'];
@@ -232,14 +227,7 @@ function editUser(){
     $user_id=$_GET['edit'];
     $username = $_POST["username"];
     $password=$_POST['user_password'];
-    $query = "SELECT user_randSalt FROM users";
-    $query_result=mysqli_query($connection,$query);
-    if(!$query_result)
-      echo DIE(mysqli_error($connection));
-    while($row = mysqli_fetch_array($query_result)){
-    $salt = $row['user_randSalt'];
-  }
-    $user_password = crypt($password,$salt);
+    $user_password = password_hash($password,PASSWORD_DEFAULT,array('cost'=>10));
     $user_firstname=$_POST['user_firstname'];
     $user_lastname=$_POST['user_lastname'];
     $user_email=$_POST['user_email'];

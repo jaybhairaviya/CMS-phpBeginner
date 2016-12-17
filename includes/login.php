@@ -8,14 +8,6 @@ if(isset($_POST['login'])){
   $password = $_POST['user_password'];
   $username = mysqli_real_escape_string($connection,$username);
   $password=mysqli_real_escape_string($connection,$password);
-  $query = "SELECT user_randSalt FROM users";
-  $query_result=mysqli_query($connection,$query);
-  if(!$query_result)
-    echo DIE(mysqli_error($connection));
-  while($row = mysqli_fetch_array($query_result)){
-  $salt = $row['user_randSalt'];
-}
-  $password = crypt($password,$salt);
   $query = "SELECT * FROM users WHERE username='{$username}'";
   $query_result = mysqli_query($connection,$query);
   $row_count = mysqli_num_rows($query_result);
@@ -32,7 +24,7 @@ if(isset($_POST['login'])){
     $db_lastname = $row['user_lastname'];
     $db_userrole=$row['user_role'];
     }
-    if($db_username == $username && $db_password == $password){
+    if(password_verify($password,$db_password)){
     $_SESSION['username'] = $db_username;
     $_SESSION['password']=$db_password;
     $_SESSION['user_role']=$db_userrole;
