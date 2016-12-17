@@ -9,6 +9,31 @@ else {
     header("Location: ../index.php");
 }
  ?>
+
+ <!-- Code of Users online facility -->
+ <?php
+ $session = session_id();
+ $time = time();
+ $timeout_in_secs = 60;
+ $time_out = $time - 60;
+ $query =mysqli_query($connection,"SELECT * FROM users_online WHERE session='{$session}'");
+ $count=mysqli_num_rows($query);
+ //if present session not present in database than insert it
+ if($count == 0){
+   $query = mysqli_query($connection,"INSERT INTO users_online(session,time) VALUES('{$session}','{$time}')");
+ }
+ // if present session is present than update the time to present time
+ else{
+   $query = mysqli_query($connection,"UPDATE users_online SET time='{$time}' WHERE session='{$session}'");
+ }
+ //deleting entries where time has passed timeout
+ $query = mysqli_query($connection,"DELETE FROM users_online WHERE time < $time_out");
+ // selecting entries from table where time has not passed the timeout
+  $query=mysqli_query($connection,"SELECT * FROM users_online WHERE time > $time_out");
+  $online_count=mysqli_num_rows($query);
+
+  ?>
+
 <head>
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
     <meta charset="utf-8">
