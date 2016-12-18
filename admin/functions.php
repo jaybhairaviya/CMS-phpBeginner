@@ -187,13 +187,17 @@ function addUser() {
 
 function deleteUser(){
   global $connection;
-  if (isset($_GET['delete'])) {
-    $user_id = $_GET['delete'];
+  if(isset($_SESSION['user_role'])){
+    if($_SESSION['user_role']=='admin'){
+      if (isset($_GET['delete'])) {
+        $user_id = $_GET['delete'];
 
-    $query = "DELETE FROM users WHERE user_id=$user_id";
-    $query_result = mysqli_query($connection,$query);
-    if(!$query_result){
-      echo "asdasd" . DIE(mysqli_error($connection));
+        $query = "DELETE FROM users WHERE user_id=$user_id";
+        $query_result = mysqli_query($connection,$query);
+        if(!$query_result){
+          echo "asdasd" . DIE(mysqli_error($connection));
+        }
+      }
     }
   }
 }
@@ -266,7 +270,8 @@ function fetchFieldsProfile(){
     while ($row=mysqli_fetch_assoc($query_result)) {
 
       $username = $row["username"];
-      $user_password=$password;
+      if(isset($password))
+        $user_password=$password;
       if(empty($user_password)){
         $user_password = $row['user_password'];
       }
@@ -286,6 +291,7 @@ function editProfile(){
     $old_username=$_SESSION['username'];
     $username = $_POST["username"];
     $user_password=$_POST['user_password'];
+    $user_password=password_hash($user_password,PASSWORD_DEFAULT,array('cost'=>10));
     $user_firstname=$_POST['user_firstname'];
     $user_lastname=$_POST['user_lastname'];
     $user_email=$_POST['user_email'];
