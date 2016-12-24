@@ -13,13 +13,17 @@
             <!-- Blog Post Content Column -->
             <div class="col-lg-8">
               <?php
-              if(isset($_GET['category_id'])){
-                $category_id = $_GET['category_id'];
-                $query = "SELECT * FROM posts WHERE post_category_id={$category_id} AND post_status='published'";
+              if(isset($_GET['post_author'])){
+                $post_author = $_GET['post_author'];
+                $query = "SELECT * FROM posts WHERE post_author='$post_author'";
                 $query_result = mysqli_query($connection,$query);
-                $row_count = mysqli_num_rows($query_result);
-                if($row_count!=0){
+                if(mysqli_num_rows($query_result)==0){
+                  header("Location: index.php");
+
+                }
+                else{
                 while ($row = mysqli_fetch_assoc($query_result)) {
+                $post_id = $row['post_id'];
                 $post_title = $row['post_title'];
                 $post_author = $row['post_author'];
                 $post_date = $row['post_date'];
@@ -29,7 +33,7 @@
                             <!-- Blog Post -->
 
                             <!-- Title -->
-                            <h1><?php echo "$post_title"; ?></h1>
+                            <h1><a href="posts.php?post_id=<?php echo "$post_id"; ?>"><?php echo "$post_title"; ?></a></h1>
 
                             <!-- Author -->
                             <p class="lead">
@@ -44,7 +48,7 @@
                             <hr>
 
                             <!-- Preview Image -->
-                              <img class="img-responsive" width="200px" height="100px;" src="images/<?php echo $post_image?>" alt="">
+                              <img class="img-responsive" src="images/<?php echo $post_image?>" alt="">
 
                             <hr>
 
@@ -53,11 +57,11 @@
                               <?php echo "$post_content"; ?>
                             </p>
                             <hr>
-<?php }}
-else {
-  echo "<h1>No result</h1>";
-}
-} ?>
+<?php }}} ?>
+
+            <hr>
+
+
             </div>
 
             <!-- Blog Sidebar Widgets Column -->

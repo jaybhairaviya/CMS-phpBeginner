@@ -21,20 +21,18 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Posts
+                            Users
                         </h1>
 
 
                     <!-- Carrying out deletion -->
                     <?php
-                  deletePost();
+                  deleteUser();
                      ?>
                      <!-- Deletion Finished -->
 
                     <!-- Add Post functiom  -->
-                    <?php addPost();  ?>
-                    <!-- Reset Post Views Count -->
-                    <?php resetPostViewsCount(); ?>
+                    <?php addUser();  ?>
                     <?php
 
                     if(isset($_GET['status'])) {
@@ -61,13 +59,13 @@
                         $source = '';
                       }
                       switch($source){
-                        case 'view_all_posts': include 'includes/view_all_posts.php';
+                        case 'view_all_users': include 'includes/view_all_users.php';
                                                 break;
-                        case 'add_post' : include 'includes/add_post.php';
+                        case 'add_user' : include 'includes/add_user.php';
                         break;
-                        case 'edit_post' : include 'includes/edit_post.php';
+                        case 'edit_user' : include 'includes/edit_user.php';
                         break;
-                        default:include 'includes/view_all_posts.php';
+                        default:include 'includes/view_all_users.php';
                       }
                        ?>
                     </div>

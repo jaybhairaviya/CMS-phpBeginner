@@ -25,8 +25,21 @@
                     <a href="category.php?category_id=<?php echo $category_id?>"><?php echo $category_name; ?></a>
                 </li>
               <?php } ?>
+              <?php
+              if(isset($_SESSION['user_role'])){
+                if(isset($_GET['post_id'])){
+                  echo "<li>
+                      <a href='admin/posts.php?source=edit_post&edit={$_GET['post_id']}'>Edit Post</a>
+                  </li>";
+                }
+              }
+
+               ?>
               <li>
                   <a href="admin/posts.php">Admin</a>
+              </li>
+              <li>
+                  <a href="registration.php">Register</a>
               </li>
             </ul>
         </div>

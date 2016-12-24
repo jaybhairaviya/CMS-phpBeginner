@@ -21,27 +21,23 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Posts
+                            Comments
                         </h1>
 
 
                     <!-- Carrying out deletion -->
                     <?php
-                  deletePost();
+                  deleteComment();
                      ?>
                      <!-- Deletion Finished -->
 
-                    <!-- Add Post functiom  -->
-                    <?php addPost();  ?>
-                    <!-- Reset Post Views Count -->
-                    <?php resetPostViewsCount(); ?>
                     <?php
 
                     if(isset($_GET['status'])) {
-                      $post_id = $_GET['post_id'];
-                      $post_status = $_GET['status'];
-                      if($post_status == 'published' || $post_status == 'draft' ) {
-                        $query = "UPDATE posts SET post_status='$post_status' WHERE post_id=$post_id";
+                      $comment_id = $_GET['comment_id'];
+                      $comment_status = $_GET['status'];
+                      if($comment_status == 'approved' || $comment_status == 'unapproved' ) {
+                        $query = "UPDATE comments SET comment_status='$comment_status' WHERE comment_id=$comment_id";
                         $query_result = mysqli_query($connection,$query);
                         if(!$query_result){
                           echo DIE(mysqli_error($connection));
@@ -51,25 +47,21 @@
 
                     }
                     ?>
-
-
-                      <?php
-                      if(isset($_GET['source'])){
-                        $source = $_GET['source'];
-                      }
-                      else {
-                        $source = '';
-                      }
-                      switch($source){
-                        case 'view_all_posts': include 'includes/view_all_posts.php';
-                                                break;
-                        case 'add_post' : include 'includes/add_post.php';
-                        break;
-                        case 'edit_post' : include 'includes/edit_post.php';
-                        break;
-                        default:include 'includes/view_all_posts.php';
-                      }
-                       ?>
+                    <?php
+                    if(isset($_GET['source'])){
+                      $source = $_GET['source'];
+                    }
+                    else {
+                      $source = '';
+                    }
+                    switch($source){
+                      case 'view_all_comments': include 'includes/view_all_comments.php';
+                                              break;
+                      case 'post_comments' : include 'includes/post_comments.php';
+                      break;
+                      default:include 'includes/view_all_comments.php';
+                    }
+                     ?>
                     </div>
                 </div>
                 <!-- /.row -->
